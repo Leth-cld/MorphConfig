@@ -16,16 +16,15 @@ jobs:
         with:
           ref: ai-fixes
           fetch-depth: 0
-
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-
       - name: Apply mechanical 1.20.1 mappings
         shell: bash
         run: |
           set -e
+          chmod +x gradlew
           find src -type f -name '*.java' -print0 | xargs -0 sed -i \
             -e 's/net\.minecraft\.client\.resources\.I18n/net.minecraft.client.resources.language.I18n/g' \
             -e 's/net\.minecraft\.util\.Util/net.minecraft.Util/g' \
@@ -46,19 +45,12 @@ jobs:
             -e 's/PoseStack\.Entry/PoseStack.Pose/g'
           find src -type f -name '*.java' -print0 | xargs -0 sed -i \
             -e 's/me\.ichun\.mods\.ichunutil\.client\.gui\.bns\.window\.constraint\.Constraint/me.ichun.mods.ichunutil.client.gui.bns.constraint.Constraint/g'
-
       - name: Compile
         run: ./gradlew clean compileJava --no-daemon --stacktrace
-
       - name: Commit mechanical port
         if: success()
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add src
-          if git diff --cached --quiet; then
-            echo 'No source changes.'
-          else
-            git commit -m 'Port remaining common 1.20.1 mappings'
-            git push origin ai-fixes
-          fi
+          if git diff --cached --quiet; then echo 'No source changes.'; else git commit -m 'Port remaining common 1.20.1 mappings'; git push origin ai-fixes; fi
