@@ -14,4 +14,4 @@ jobs:
           distribution: temurin
           java-version: '17'
       - uses: gradle/actions/setup-gradle@v4
-      - run: ./gradlew clean build --no-daemon --stacktrace
+      - run: chmod +x gradlew && ./gradlew clean build --no-daemon --stacktrace
