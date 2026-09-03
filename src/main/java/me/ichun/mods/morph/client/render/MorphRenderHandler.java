@@ -16,7 +16,7 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.PlayerRenderer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -267,12 +267,12 @@ public class MorphRenderHandler
 
                 stack.pushPose();
                 stack.translate(0F, prevLivingInstance.getBbHeight() / 2F, 0F);
-                PoseStack.Entry prevMid = stack.last();
+                PoseStack.Pose prevMid = stack.last();
                 stack.popPose();
 
                 stack.pushPose();
                 stack.translate(0F, nextLivingInstance.getBbHeight() / 2F, 0F);
-                PoseStack.Entry nextMid = stack.last();
+                PoseStack.Pose nextMid = stack.last();
                 stack.popPose();
 
                 ModelRendererCapture transitionCapture = new ModelRendererCapture();
@@ -313,7 +313,7 @@ public class MorphRenderHandler
             }
         }
 
-        public ArrayList<CaptureInfo> combineTowards(PoseStack.Entry prevMid, PoseStack.Entry nextMid, ModelRendererCapture other, float transitionProgress)
+        public ArrayList<CaptureInfo> combineTowards(PoseStack.Pose prevMid, PoseStack.Pose nextMid, ModelRendererCapture other, float transitionProgress)
         {
             ArrayList<CaptureInfo> prevInfo = infos;
             ArrayList<CaptureInfo> nextInfo = other.infos;
@@ -361,8 +361,8 @@ public class MorphRenderHandler
             for(CaptureInfo info : infos)
             {
                 newStack.pushPose();
-                PoseStack.Entry entLast = newStack.last();
-                PoseStack.Entry correctorLast = info.e;
+                PoseStack.Pose entLast = newStack.last();
+                PoseStack.Pose correctorLast = info.e;
 
                 entLast.pose().multiply(correctorLast.pose());
                 entLast.normal().multiply(correctorLast.normal());
@@ -374,10 +374,10 @@ public class MorphRenderHandler
 
         public static class CaptureInfo
         {
-            public final PoseStack.Entry e;
+            public final PoseStack.Pose e;
             public final ModelPart modelPart;
 
-            public CaptureInfo(PoseStack.Entry e, ModelPart modelPart) {
+            public CaptureInfo(PoseStack.Pose e, ModelPart modelPart) {
                 this.e = e;
                 this.modelPart = modelPart;
             }

@@ -2,7 +2,7 @@ package me.ichun.mods.morph.client.gui.biomass.window;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import me.ichun.mods.ichunutil.client.gui.bns.window.Window;
-import me.ichun.mods.ichunutil.client.gui.bns.window.constraint.Constraint;
+import me.ichun.mods.ichunutil.client.gui.bns.constraint.Constraint;
 import me.ichun.mods.ichunutil.client.gui.bns.window.view.View;
 import me.ichun.mods.ichunutil.client.gui.bns.window.view.element.Element;
 import me.ichun.mods.ichunutil.client.gui.bns.window.view.element.ElementTextWrapper;
@@ -10,7 +10,7 @@ import me.ichun.mods.ichunutil.client.gui.bns.window.view.element.ElementToggle;
 import me.ichun.mods.morph.client.gui.biomass.WorkspaceMorph;
 import me.ichun.mods.morph.client.gui.biomass.window.element.ElementBiomassBar;
 import me.ichun.mods.morph.common.Morph;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.client.resources.language.I18n;
 
 import javax.annotation.Nonnull;
 

@@ -28,8 +28,8 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 
 public class EventHandlerServer
 {
@@ -141,13 +141,13 @@ public class EventHandlerServer
     }
 
     @SubscribeEvent
-    public void onServerAboutToStart(FMLServerAboutToStartEvent event) //do this early so we do it before the server loads our world save.
+    public void onServerAboutToStart(ServerAboutToStartEvent event) //do this early so we do it before the server loads our world save.
     {
         BiomassUpgradeHandler.loadBiomassUpgrades();
     }
 
     @SubscribeEvent
-    public void onServerStopped(FMLServerStoppedEvent event)
+    public void onServerStopped(ServerStoppedEvent event)
     {
         MorphHandler.INSTANCE.setSaveData(null);
     }
