@@ -33,6 +33,18 @@ minecraft {
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+configurations {
+    // A custom resolvable view of the normal mod dependencies. The Morph
+    // project has a custom API source set, so relying on Gradle's default
+    // source-set inheritance loses dependencies during compileJava.
+    morphCompile {
+        canBeConsumed = false
+        canBeResolved = true
+        extendsFrom implementation
+    }
+}
+
 sourceSets {
     api {
         resources { exclude 'META-INF/accesstransformer.cfg' }
@@ -40,9 +52,10 @@ sourceSets {
         runtimeClasspath += configurations.runtimeClasspath
     }
     main {
-        // Main is custom in the original project; use ForgeGradle's normal
-        // runtime classpath so Minecraft and iChunUtil are both available.
-        compileClasspath += configurations.runtimeClasspath
+        // Reuse the API source set's proven Minecraft classpath and add a
+        // resolvable configuration containing iChunUtil and other mod deps.
+        compileClasspath += sourceSets.api.compileClasspath
+        compileClasspath += configurations.morphCompile
         compileClasspath += sourceSets.api.output
         runtimeClasspath += configurations.runtimeClasspath
         runtimeClasspath += sourceSets.api.output
