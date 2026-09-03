@@ -1,0 +1,38 @@
+package me.ichun.mods.morph.api.mob.trait;
+
+import net.minecraft.world.entity.Mob;
+import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+public class HostileTrait extends Trait<HostileTrait>
+    implements IEventBusRequired
+{
+    public transient float lastStrength = 0F;
+
+    public HostileTrait()
+    {
+        type = "traitHostile";
+    }
+
+    @Override
+    public void tick(float strength)
+    {
+        lastStrength = strength;
+    }
+
+    @Override
+    public HostileTrait copy()
+    {
+        return new HostileTrait();
+    }
+
+    @SubscribeEvent
+    public void onLivingSetTarget(LivingChangeTargetEvent event)
+    {
+        //if the target is the player and it's not the revenge target/entity attacking it, cancel
+        if(lastStrength == 1F && event.getNewTarget() == player && event.getEntity() instanceof Mob && !(event.getEntity().getLastHurtByMob() == player || event.getEntity().getLastHurtByMob() == player))
+        {
+            event.setNewTarget(null);
+        }
+    }
+}
