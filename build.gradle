@@ -8,7 +8,6 @@ plugins {
 
 version = mod_version
 group = mod_group_id
-
 base { archivesName = mod_id }
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -41,11 +40,10 @@ sourceSets {
         runtimeClasspath += configurations.runtimeClasspath
     }
     main {
-        // This is a custom source set in the original Morph project. Explicitly
-        // inherit both Minecraft and mod dependencies so ForgeGradle does not
-        // silently compile the main sources against an incomplete classpath.
-        compileClasspath += configurations.minecraft
-        compileClasspath += configurations.implementation
+        // Main is a custom source set in the original Morph project. Keep the
+        // normal resolvable compile classpath (Minecraft + implementation deps)
+        // and add the API output explicitly.
+        compileClasspath += configurations.compileClasspath
         compileClasspath += sourceSets.api.output
         runtimeClasspath += configurations.runtimeClasspath
         runtimeClasspath += sourceSets.api.output
