@@ -45,12 +45,11 @@ jobs:
             -e 's/PoseStack\.Entry/PoseStack.Pose/g'
           find src -type f -name '*.java' -print0 | xargs -0 sed -i \
             -e 's/me\.ichun\.mods\.ichunutil\.client\.gui\.bns\.window\.constraint\.Constraint/me.ichun.mods.ichunutil.client.gui.bns.constraint.Constraint/g'
-      - name: Compile
-        run: ./gradlew clean compileJava --no-daemon --stacktrace
-      - name: Commit mechanical port
-        if: success()
+      - name: Commit mechanical changes
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add src
-          if git diff --cached --quiet; then echo 'No source changes.'; else git commit -m 'Port remaining common 1.20.1 mappings'; git push origin ai-fixes; fi
+          if git diff --cached --quiet; then echo 'No source changes.'; else git commit -m 'Apply 1.20.1 API mappings'; git push origin ai-fixes; fi
+      - name: Compile
+        run: ./gradlew clean compileJava --no-daemon --stacktrace
