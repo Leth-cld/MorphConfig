@@ -22,7 +22,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.client.renderer.entity.PlayerRenderer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -202,9 +202,9 @@ public final class HandHandler
 
                                 if(prevStacks[i] != null || nextStacks[i] != null)
                                 {
-                                    PoseStack.Entry interimStackEntry = RenderHelper.createInterimStackEntry(prevStacks[i] != null ? prevStacks[i].last() : (new PoseStack()).last(), nextStacks[i] != null ? nextStacks[i].last() : (new PoseStack()).last(), transitionProg);
+                                    PoseStack.Pose interimStackEntry = RenderHelper.createInterimStackEntry(prevStacks[i] != null ? prevStacks[i].last() : (new PoseStack()).last(), nextStacks[i] != null ? nextStacks[i].last() : (new PoseStack()).last(), transitionProg);
                                     PoseStack interimStack = new PoseStack();
-                                    PoseStack.Entry last = interimStack.last();
+                                    PoseStack.Pose last = interimStack.last();
                                     last.pose().multiply(interimStackEntry.pose());
                                     last.normal().multiply(interimStackEntry.normal());
                                     stacks[i] = interimStack;

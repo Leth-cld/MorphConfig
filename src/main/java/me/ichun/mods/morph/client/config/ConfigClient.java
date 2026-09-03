@@ -1,7 +1,7 @@
 package me.ichun.mods.morph.client.config;
 
 import me.ichun.mods.ichunutil.client.gui.bns.window.WindowPopup;
-import me.ichun.mods.ichunutil.client.gui.bns.window.constraint.Constraint;
+import me.ichun.mods.ichunutil.client.gui.bns.constraint.Constraint;
 import me.ichun.mods.ichunutil.client.gui.bns.window.view.element.*;
 import me.ichun.mods.ichunutil.common.config.ConfigBase;
 import me.ichun.mods.ichunutil.common.config.annotations.CategoryDivider;
@@ -9,7 +9,7 @@ import me.ichun.mods.ichunutil.common.config.annotations.Prop;
 import me.ichun.mods.morph.client.render.hand.HandHandler;
 import me.ichun.mods.morph.common.Morph;
 import me.ichun.mods.morph.common.resource.ResourceHandler;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 

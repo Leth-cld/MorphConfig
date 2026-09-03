@@ -3,7 +3,7 @@ package me.ichun.mods.morph.client.gui.biomass;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.ichun.mods.ichunutil.client.gui.bns.Workspace;
-import me.ichun.mods.ichunutil.client.gui.bns.window.constraint.Constraint;
+import me.ichun.mods.ichunutil.client.gui.bns.constraint.Constraint;
 import me.ichun.mods.morph.client.gui.biomass.scene.Scene;
 import me.ichun.mods.morph.client.gui.biomass.scene.SceneBiomassAbilities;
 import me.ichun.mods.morph.client.gui.biomass.scene.SceneBiomassUpgrades;

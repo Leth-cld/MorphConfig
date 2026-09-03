@@ -554,8 +554,8 @@ public class EntityAcquisition extends Entity
                         {
                             PoseStack identityStack = new PoseStack();
                             stack.pushPose();
-                            PoseStack.Entry e = RenderHelper.createInterimStackEntry(identityStack.last(), info.e, Mth.clamp(scale * 3F, 0F, 1F));
-                            PoseStack.Entry last = stack.last();
+                            PoseStack.Pose e = RenderHelper.createInterimStackEntry(identityStack.last(), info.e, Mth.clamp(scale * 3F, 0F, 1F));
+                            PoseStack.Pose last = stack.last();
                             last.pose().multiply(e.pose());
                             last.normal().multiply(e.normal());
                             info.createAndRender(stack, vertexBuilder, light, overlay, 1F, 1F, 1F, alpha);

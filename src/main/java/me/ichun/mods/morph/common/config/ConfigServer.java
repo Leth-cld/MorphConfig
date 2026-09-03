@@ -8,10 +8,10 @@ import me.ichun.mods.morph.common.Morph;
 import me.ichun.mods.morph.common.mode.MorphModeType;
 import me.ichun.mods.morph.common.morph.MorphHandler;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Util;
+import net.minecraft.Util;
 import net.minecraftforge.fml.util.thread.EffectiveSide;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.server.ServerLifecycleHooks;
+import net.minecraftforge.server.ServerLifecycleHooks;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

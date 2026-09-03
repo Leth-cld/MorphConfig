@@ -16,7 +16,7 @@ import me.ichun.mods.morph.common.morph.save.PlayerMorphData;
 import me.ichun.mods.morph.common.packet.PacketOpenGenerator;
 import me.ichun.mods.morph.common.packet.PacketUpdateMorph;
 import me.ichun.mods.morph.common.resource.ResourceHandler;
-import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.CommandSourceStackStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.*;
@@ -194,7 +194,7 @@ public class CommandMorph
         );
     }
 
-    private static int unacquire(CommandSource source, ServerPlayer player, ResourceLocation variant_id, int i) throws CommandSyntaxException
+    private static int unacquire(CommandSourceStack source, ServerPlayer player, ResourceLocation variant_id, int i) throws CommandSyntaxException
     {
         PlayerMorphData morphData = MorphHandler.INSTANCE.getPlayerMorphData(player);
 
@@ -255,7 +255,7 @@ public class CommandMorph
         throw UNABLE_TO_UNACQUIRE_CANNOT_FIND_ID.create();
     }
 
-    private static int openMobDataGerator(CommandSource source) throws CommandSyntaxException
+    private static int openMobDataGerator(CommandSourceStack source) throws CommandSyntaxException
     {
         ServerPlayer player = source.asPlayer();
 
@@ -264,7 +264,7 @@ public class CommandMorph
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int openNBTGenerator(CommandSource source, Entity target) throws CommandSyntaxException
+    private static int openNBTGenerator(CommandSourceStack source, Entity target) throws CommandSyntaxException
     {
         if(!(target instanceof LivingEntity))
         {
@@ -283,13 +283,13 @@ public class CommandMorph
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int setBiomass(CommandSource source, ServerPlayer player, double value)
+    private static int setBiomass(CommandSourceStack source, ServerPlayer player, double value)
     {
         MorphHandler.INSTANCE.setBiomassAmount(player, value);
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int createMorph(CommandSource source, ServerPlayer player, Entity entity, boolean isAcquire) throws CommandSyntaxException
+    private static int createMorph(CommandSourceStack source, ServerPlayer player, Entity entity, boolean isAcquire) throws CommandSyntaxException
     {
         if(entity instanceof LivingEntity)
         {
@@ -304,7 +304,7 @@ public class CommandMorph
         throw NOT_LIVING_ENTITY.create();
     }
 
-    private static int createMorph(CommandSource source, ServerPlayer player, ResourceLocation type, CompoundTag nbt, boolean isAcquire) throws CommandSyntaxException
+    private static int createMorph(CommandSourceStack source, ServerPlayer player, ResourceLocation type, CompoundTag nbt, boolean isAcquire) throws CommandSyntaxException
     {
         //Taken from SummonCommand
         CompoundTag compoundnbt = nbt.copy();
@@ -322,7 +322,7 @@ public class CommandMorph
         }
     }
 
-    private static int createPlayerMorph(CommandSource source, ServerPlayer player, String name, boolean isAcquire) throws CommandSyntaxException
+    private static int createPlayerMorph(CommandSourceStack source, ServerPlayer player, String name, boolean isAcquire) throws CommandSyntaxException
     {
         GameProfile gameProfile = EntityHelper.getGameProfile(null, name);
         if(gameProfile.getId() == null) //maybe lookup failed, UUID will be null.
@@ -338,7 +338,7 @@ public class CommandMorph
         throw isAcquire ? UNABLE_TO_ACQUIRE_MORPH.create() : UNABLE_TO_MORPH_TO.create();
     }
 
-    private static int createPlayerMorph(CommandSource source, ServerPlayer player, UUID uuid, boolean isAcquire) throws CommandSyntaxException
+    private static int createPlayerMorph(CommandSourceStack source, ServerPlayer player, UUID uuid, boolean isAcquire) throws CommandSyntaxException
     {
         MorphVariant variant = MorphVariant.createPlayerMorph(uuid, true);
         if(createMorph(source, player, variant, isAcquire))
@@ -349,7 +349,7 @@ public class CommandMorph
         throw isAcquire ? UNABLE_TO_ACQUIRE_MORPH.create() : UNABLE_TO_MORPH_TO.create();
     }
 
-    private static boolean createMorph(CommandSource source, ServerPlayer player, MorphVariant variant, boolean isAcquire)
+    private static boolean createMorph(CommandSourceStack source, ServerPlayer player, MorphVariant variant, boolean isAcquire)
     {
         if(isAcquire)
         {
@@ -361,7 +361,7 @@ public class CommandMorph
         }
     }
 
-    private static int demorphPlayer(CommandSource source, ServerPlayer player) throws CommandSyntaxException
+    private static int demorphPlayer(CommandSourceStack source, ServerPlayer player) throws CommandSyntaxException
     {
         if(MorphHandler.INSTANCE.demorph(player))
         {

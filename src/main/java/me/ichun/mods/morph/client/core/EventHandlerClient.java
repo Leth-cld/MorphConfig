@@ -13,7 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.CameraType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
-import net.minecraftforge.client.event.RenderNameplateEvent;
+import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -67,7 +67,7 @@ public class EventHandlerClient
     }
 
     @SubscribeEvent
-    public void onRenderNameplate(RenderNameplateEvent event)
+    public void onRenderNameplate(RenderNameTagEvent event)
     {
         if(MorphRenderHandler.denyRenderNameplate || event.getEntity().getPersistentData().contains(MorphVariant.NBT_PLAYER_ID) && !MorphRenderHandler.isRenderingMorph)
         {
@@ -103,7 +103,7 @@ public class EventHandlerClient
     }
 
     @SubscribeEvent
-    public void onClientDisconnect(ClientPlayerNetworkEvent.LoggedOutEvent event)
+    public void onClientDisconnect(ClientPlayerNetworkEvent.LoggingOut event)
     {
         setPlayerMorphData(null);
     }

@@ -5,7 +5,7 @@ import me.ichun.mods.morph.api.mob.trait.*;
 import me.ichun.mods.morph.api.mob.trait.ability.*;
 import me.ichun.mods.morph.common.Morph;
 import me.ichun.mods.morph.common.resource.ResourceHandler;
-import net.minecraft.util.Util;
+import net.minecraft.Util;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;

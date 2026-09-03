@@ -9,7 +9,7 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
-import net.minecraft.util.Util;
+import net.minecraft.Util;
 import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;

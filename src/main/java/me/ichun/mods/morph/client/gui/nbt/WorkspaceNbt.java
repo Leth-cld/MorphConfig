@@ -3,7 +3,7 @@ package me.ichun.mods.morph.client.gui.nbt;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.ichun.mods.ichunutil.client.gui.bns.Workspace;
-import me.ichun.mods.ichunutil.client.gui.bns.window.constraint.Constraint;
+import me.ichun.mods.ichunutil.client.gui.bns.constraint.Constraint;
 import me.ichun.mods.morph.client.gui.nbt.window.WindowNbt;
 import me.ichun.mods.morph.common.Morph;
 import net.minecraft.client.gui.screens.Screen;

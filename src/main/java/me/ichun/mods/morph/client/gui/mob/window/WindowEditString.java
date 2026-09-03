@@ -2,11 +2,11 @@ package me.ichun.mods.morph.client.gui.mob.window;
 
 import me.ichun.mods.ichunutil.client.gui.bns.Workspace;
 import me.ichun.mods.ichunutil.client.gui.bns.window.Window;
-import me.ichun.mods.ichunutil.client.gui.bns.window.constraint.Constraint;
+import me.ichun.mods.ichunutil.client.gui.bns.constraint.Constraint;
 import me.ichun.mods.ichunutil.client.gui.bns.window.view.View;
 import me.ichun.mods.ichunutil.client.gui.bns.window.view.element.ElementButton;
 import me.ichun.mods.ichunutil.client.gui.bns.window.view.element.ElementTextField;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.client.resources.language.I18n;
 
 import javax.annotation.Nonnull;
 import java.util.function.Consumer;

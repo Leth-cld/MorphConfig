@@ -36,7 +36,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Util;
+import net.minecraft.Util;
 import net.minecraft.util.Mth;
 import org.joml.Matrix4f;
 import net.minecraft.network.chat.MutableComponent;
@@ -1316,7 +1316,7 @@ public class HudHandler
     }
 
     @SubscribeEvent
-    public void onRawMouseInput(InputEvent.RawMouseEvent event)
+    public void onRawMouseInput(InputEvent.MouseButton.Pre event)
     {
         if(Morph.configClient.selectorAllowMouseControl && event.getAction() == GLFW.GLFW_PRESS)
         {
@@ -1354,7 +1354,7 @@ public class HudHandler
     }
 
     @SubscribeEvent
-    public void onMouseScroll(InputEvent.MouseScrollEvent event)
+    public void onMouseScroll(InputEvent.MouseScrollingEvent event)
     {
         if(Morph.configClient.selectorAllowMouseControl && showSelector && event.getScrollDelta() != 0)
         {
