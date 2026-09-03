@@ -1,0 +1,64 @@
+name: Auto port Morph 1.20.1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  port:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ai-fixes
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Apply mechanical 1.20.1 mappings
+        shell: bash
+        run: |
+          set -e
+          find src -type f -name '*.java' -print0 | xargs -0 sed -i \
+            -e 's/net\.minecraft\.client\.resources\.I18n/net.minecraft.client.resources.language.I18n/g' \
+            -e 's/net\.minecraft\.util\.Util/net.minecraft.Util/g' \
+            -e 's/net\.minecraft\.client\.renderer\.entity\.PlayerRenderer/net.minecraft.client.renderer.entity.player.PlayerRenderer/g' \
+            -e 's/net\.minecraftforge\.fml\.server\.ServerLifecycleHooks/net.minecraftforge.server.ServerLifecycleHooks/g' \
+            -e 's/net\.minecraftforge\.fml\.event\.server\.FMLServerAboutToStartEvent/net.minecraftforge.event.server.ServerAboutToStartEvent/g' \
+            -e 's/net\.minecraftforge\.fml\.event\.server\.FMLServerStoppedEvent/net.minecraftforge.event.server.ServerStoppedEvent/g' \
+            -e 's/FMLServerAboutToStartEvent/ServerAboutToStartEvent/g' \
+            -e 's/FMLServerStoppedEvent/ServerStoppedEvent/g' \
+            -e 's/ClientPlayerNetworkEvent\.LoggedOutEvent/ClientPlayerNetworkEvent.LoggingOut/g' \
+            -e 's/net\.minecraftforge\.client\.event\.RenderNameplateEvent/net.minecraftforge.client.event.RenderNameTagEvent/g' \
+            -e 's/RenderNameplateEvent/RenderNameTagEvent/g' \
+            -e 's/InputEvent\.RawMouseEvent/InputEvent.MouseButton.Pre/g' \
+            -e 's/InputEvent\.MouseScrollEvent/InputEvent.MouseScrollingEvent/g' \
+            -e 's/net\.minecraft\.commands\.CommandSource/net.minecraft.commands.CommandSourceStack/g' \
+            -e 's/CommandSource source/CommandSourceStack source/g' \
+            -e 's/CommandSource,/CommandSourceStack,/g' \
+            -e 's/PoseStack\.Entry/PoseStack.Pose/g'
+
+          # iChunUtil 1.20.1 uses the new BNS package layout.
+          find src -type f -name '*.java' -print0 | xargs -0 sed -i \
+            -e 's/me\.ichun\.mods\.ichunutil\.client\.gui\.bns\.window\.constraint\.Constraint/me.ichun.mods.ichunutil.client.gui.bns.constraint.Constraint/g'
+
+      - name: Compile
+        run: ./gradlew clean compileJava --no-daemon --stacktrace
+
+      - name: Commit mechanical port
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src
+          if git diff --cached --quiet; then
+            echo 'No source changes.'
+          else
+            git commit -m 'Port remaining common 1.20.1 mappings'
+            git push origin ai-fixes
+          fi
