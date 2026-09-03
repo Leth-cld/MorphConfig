@@ -40,10 +40,9 @@ sourceSets {
         runtimeClasspath += configurations.runtimeClasspath
     }
     main {
-        // Main is a custom source set in the original Morph project. Keep the
-        // normal resolvable compile classpath (Minecraft + implementation deps)
-        // and add the API output explicitly.
-        compileClasspath += configurations.compileClasspath
+        // Main is custom in the original project; use ForgeGradle's normal
+        // runtime classpath so Minecraft and iChunUtil are both available.
+        compileClasspath += configurations.runtimeClasspath
         compileClasspath += sourceSets.api.output
         runtimeClasspath += configurations.runtimeClasspath
         runtimeClasspath += sourceSets.api.output
